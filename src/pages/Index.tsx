@@ -214,6 +214,68 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* БЛОК 4 — СОЦИАЛЬНЫЕ ДОКАЗАТЕЛЬСТВА */}
+      <section className="relative overflow-hidden border-t border-white/5 py-24">
+        <div className="container">
+          <h2 className="text-center font-display text-5xl font-bold tracking-tight sm:text-6xl">
+            Уже работают в Находке и{' '}
+            <span className="italic text-amber-500">Приморье</span>
+          </h2>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                text: 'Поставили автомат в зону ожидания нашего шиномонтажа. Клиенты довольны, мы получаем около 18 000 ₽ в месяц — просто так, пока люди ждут машину. Ни разу не пожалели.',
+                name: 'Сергей Д.',
+                role: 'шиномонтаж «Колесо», Находка',
+              },
+              {
+                text: 'Взяли аппарат в аренду для офиса на 25 человек. Сотрудники счастливы, никаких очередей на кухне. Кофе обходится в 40 ₽ за чашку — дешевле, чем покупать в кофейне.',
+                name: 'Наталья В.',
+                role: 'HR-директор, логистическая компания, Находка',
+              },
+              {
+                text: 'Хотел пассивный доход, но не знал с чего начать. Пришёл на консультацию — через неделю аппарат уже стоял в торговом центре. Первый месяц — 22 000 чистыми.',
+                name: 'Алексей М.',
+                role: 'предприниматель, Находка',
+              },
+            ].map((r, i) => (
+              <div
+                key={i}
+                className="flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all hover:border-amber-700/40 hover:bg-white/[0.05]"
+              >
+                <div className="flex gap-1 text-amber-400">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <Icon key={s} name="Star" size={18} className="fill-amber-400" />
+                  ))}
+                </div>
+                <p className="mt-5 flex-grow text-lg italic leading-relaxed text-[#f3e9dd]/80">
+                  «{r.text}»
+                </p>
+                <div className="mt-6 border-t border-white/10 pt-5">
+                  <div className="font-display text-xl font-semibold text-amber-300">{r.name}</div>
+                  <div className="text-sm text-[#f3e9dd]/50">{r.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5 lg:grid-cols-4">
+            {[
+              ['38 +', 'точек в Приморье'],
+              ['4 года', 'на рынке Находки'],
+              ['от 6 мес', 'окупаемость аппарата'],
+              ['0 ₽', 'вложений по схеме партнёрства'],
+            ].map(([n, l]) => (
+              <div key={l} className="bg-[#1a120b] px-6 py-10 text-center">
+                <div className="font-display text-4xl font-bold text-amber-400 sm:text-5xl">{n}</div>
+                <div className="mt-2 text-sm text-[#f3e9dd]/55">{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
