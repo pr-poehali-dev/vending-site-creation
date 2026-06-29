@@ -142,6 +142,16 @@ const Index = () => {
       <section className="relative overflow-hidden border-t border-white/5 bg-white/[0.02] py-24">
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-amber-800/20 blur-[140px] animate-glow" />
         <div className="container relative">
+          <div className="relative mx-auto mb-16 max-w-3xl overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-amber-900/20">
+            <video
+              src="https://cdn.poehali.dev/projects/0a06cd5a-f821-4e9a-b05a-5446779b85b3/bucket/82515840-ccbf-4ce7-a839-f4599b4763e0.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="aspect-video w-full object-cover"
+            />
+          </div>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-display text-5xl font-bold tracking-tight sm:text-6xl">
               Три способа зарабатывать на кофе в{' '}
