@@ -6,6 +6,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const COFFEE_IMG =
   'https://cdn.poehali.dev/projects/0a06cd5a-f821-4e9a-b05a-5446779b85b3/files/b2af9712-1ded-4dc6-ac6c-8b9ceb3d7d6c.jpg';
@@ -332,6 +340,81 @@ const Index = () => {
           </Accordion>
         </div>
       </section>
+
+      {/* БЛОК 6 — ФИНАЛЬНЫЙ CTA + ФОРМА */}
+      <section className="relative overflow-hidden border-t border-white/5 py-24">
+        <div className="absolute left-1/2 top-0 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-amber-800/25 blur-[150px] animate-glow" />
+        <div className="container relative max-w-3xl text-center">
+          <h2 className="font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Узнай за 15 минут, сколько принесёт кофейный автомат именно{' '}
+            <span className="italic text-amber-500">в твоей точке</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-lg text-[#f3e9dd]/60">
+            Оставь заявку — мы позвоним, зададим пару вопросов о вашем месте и дадим
+            конкретные цифры. Без воды, без давления.
+          </p>
+
+          <form className="mx-auto mt-12 max-w-lg space-y-4 rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur">
+            <Input
+              placeholder="Ваше имя"
+              className="h-13 rounded-xl border-white/10 bg-[#1a120b]/60 py-6 text-[#f3e9dd] placeholder:text-[#f3e9dd]/40"
+            />
+            <Input
+              placeholder="Телефон (WhatsApp или Telegram)"
+              className="h-13 rounded-xl border-white/10 bg-[#1a120b]/60 py-6 text-[#f3e9dd] placeholder:text-[#f3e9dd]/40"
+            />
+            <Select>
+              <SelectTrigger className="h-auto rounded-xl border-white/10 bg-[#1a120b]/60 py-6 text-[#f3e9dd]">
+                <SelectValue placeholder="Как связаться?" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="call">Позвонить</SelectItem>
+                <SelectItem value="whatsapp">WhatsApp</SelectItem>
+                <SelectItem value="telegram">Telegram</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button
+              type="submit"
+              className="h-16 w-full rounded-xl bg-amber-600 text-lg font-bold text-[#1a120b] shadow-2xl shadow-amber-900/40 transition-transform hover:scale-[1.02] hover:bg-amber-500"
+            >
+              ☕ Получить бесплатный расчёт
+            </Button>
+            <p className="flex items-center justify-center gap-2 text-sm text-[#f3e9dd]/45">
+              🔒 Никакого спама. Только конкретный расчёт под вашу ситуацию. Ответим в течение 15 минут.
+            </p>
+          </form>
+
+          <div className="mx-auto mt-12 grid max-w-2xl gap-4 sm:grid-cols-3">
+            {[
+              { icon: '📱', label: 'WhatsApp / Telegram', value: '+7 (924) 3222 122' },
+              { icon: '📍', label: 'Находка', value: 'Приморский край' },
+              { icon: '⏰', label: 'Работаем', value: 'пн–вс, 9:00–19:00' },
+            ].map((c) => (
+              <div
+                key={c.label}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+              >
+                <div className="text-2xl">{c.icon}</div>
+                <div className="mt-2 font-display text-lg font-semibold text-amber-300">{c.label}</div>
+                <div className="text-sm text-[#f3e9dd]/55">{c.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/5 py-10">
+        <div className="container flex flex-col items-center justify-between gap-4 text-sm text-[#f3e9dd]/50 sm:flex-row">
+          <div className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-700 text-[#f3e9dd]">
+              <Icon name="Coffee" size={16} />
+            </div>
+            <span className="font-display text-xl font-bold text-[#f3e9dd]">BREW</span>
+          </div>
+          <span>© 2026 BREW. Кофейные автоматы в Находке.</span>
+        </div>
+      </footer>
     </div>
   );
 };
