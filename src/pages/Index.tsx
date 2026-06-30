@@ -78,6 +78,51 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* БЛОК 2 — ПРОБЛЕМА */}
+      <section className="relative overflow-hidden border-t border-white/5 py-24">
+        <div className="container">
+          <h2 className="text-center font-display text-5xl font-bold tracking-tight sm:text-6xl">
+            Это про <span className="italic text-amber-500">вас</span>?
+          </h2>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                emoji: '☕',
+                title: 'Посетители просят кофе — а вы не кофейня',
+                text: 'Офис, шиномонтаж, парикмахерская, магазин. Людям хочется кофе, но варить вручную некому и незачем.',
+              },
+              {
+                emoji: '💸',
+                title: 'Место есть — деньги не зарабатывает',
+                text: 'Угол в торговом зале, коридор, зона ожидания — простаивают. А могли бы приносить 15 000–30 000 ₽ в месяц.',
+              },
+              {
+                emoji: '🔧',
+                title: 'Боитесь возни с техникой и поставщиками',
+                text: 'Думаете: сломается — кто чинить будет? Где брать зерно? Кто заправлять? Всё это кажется сложным.',
+              },
+            ].map((c, i) => (
+              <div
+                key={i}
+                className="group rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all hover:border-amber-700/40 hover:bg-white/[0.05]"
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-700/10 text-3xl transition-transform group-hover:scale-110">
+                  {c.emoji}
+                </div>
+                <h3 className="mt-6 font-display text-2xl font-semibold leading-snug">{c.title}</h3>
+                <p className="mt-3 text-[#f3e9dd]/55">{c.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mx-auto mt-14 max-w-2xl text-center font-display text-3xl font-medium leading-snug sm:text-4xl">
+            Мы убираем все три проблемы.{' '}
+            <span className="italic text-amber-500">Вы просто получаете деньги.</span>
+          </p>
+        </div>
+      </section>
     </div>
   );
 };
