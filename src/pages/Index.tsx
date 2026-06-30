@@ -356,11 +356,11 @@ const Index = () => {
 
           <form className="mx-auto mt-12 max-w-lg space-y-4 rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur">
             <Input
-              placeholder="Ваше имя"
+              placeholder="Ваше имя (например, Сергей)"
               className="h-13 rounded-xl border-white/10 bg-[#1a120b]/60 py-6 text-[#f3e9dd] placeholder:text-[#f3e9dd]/40"
             />
             <Input
-              placeholder="Телефон (WhatsApp или Telegram)"
+              placeholder="Телефон (МАКС или Telegram)"
               className="h-13 rounded-xl border-white/10 bg-[#1a120b]/60 py-6 text-[#f3e9dd] placeholder:text-[#f3e9dd]/40"
             />
             <Select>
@@ -369,7 +369,7 @@ const Index = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="call">Позвонить</SelectItem>
-                <SelectItem value="whatsapp">WhatsApp</SelectItem>
+                <SelectItem value="max">МАКС</SelectItem>
                 <SelectItem value="telegram">Telegram</SelectItem>
               </SelectContent>
             </Select>
@@ -386,7 +386,7 @@ const Index = () => {
 
           <div className="mx-auto mt-12 grid max-w-2xl gap-4 sm:grid-cols-3">
             {[
-              { icon: '📱', label: 'WhatsApp / Telegram', value: '+7 (924) 3222 122' },
+              { icon: '📱', label: 'МАКС / Telegram', value: '+7 (924) 3222 122' },
               { icon: '📍', label: 'Находка', value: 'Приморский край' },
               { icon: '⏰', label: 'Работаем', value: 'пн–вс, 9:00–19:00' },
             ].map((c) => (
