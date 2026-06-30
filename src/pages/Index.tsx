@@ -123,6 +123,97 @@ const Index = () => {
           </p>
         </div>
       </section>
+
+      {/* БЛОК 3 — РЕШЕНИЕ + ОФФЕР */}
+      <section className="relative overflow-hidden border-t border-white/5 bg-white/[0.02] py-24">
+        <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-amber-800/20 blur-[140px] animate-glow" />
+        <div className="container relative">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-display text-5xl font-bold tracking-tight sm:text-6xl">
+              Три способа зарабатывать на кофе в{' '}
+              <span className="italic text-amber-500">Находке</span>
+            </h2>
+            <p className="mt-5 text-lg text-[#f3e9dd]/60">
+              Выбери формат под себя — мы подстроимся под вашу ситуацию:
+            </p>
+          </div>
+
+          <div className="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
+            {[
+              {
+                emoji: '🤝',
+                title: 'Партнёрство — вложений ноль',
+                text: 'У вас есть место 60×60 см и розетка 220В. Мы ставим аппарат за свой счёт, загружаем зерно и обслуживаем. Вы получаете 20–35% с каждой чашки.',
+                highlight: 'От 8 000 до 25 000 ₽ в месяц чистыми',
+                price: '',
+                cta: 'Хочу так',
+                featured: true,
+              },
+              {
+                emoji: '💼',
+                title: 'Свой аппарат под ключ',
+                text: 'Покупаете аппарат — мы находим место, запускаем, берём обслуживание на себя. Весь доход — ваш.',
+                highlight: 'Окупаемость: 6–10 месяцев',
+                price: 'От 180 000 ₽',
+                cta: 'Рассчитать стоимость',
+                featured: false,
+              },
+              {
+                emoji: '🏢',
+                title: 'Корпоративный кофе для офиса',
+                text: 'Хотите кофе для сотрудников без найма баристы? Аренда аппарата + полное обслуживание. Сотрудники пьют кофе по 35–50 ₽ — вы ничего не тратите.',
+                highlight: 'Аренда от 2 500 ₽/мес',
+                price: '',
+                cta: 'Узнать подробнее',
+                featured: false,
+              },
+            ].map((c, i) => (
+              <div
+                key={i}
+                className={`flex flex-col rounded-3xl border p-8 transition-all ${
+                  c.featured
+                    ? 'border-amber-600/50 bg-amber-700/10 shadow-2xl shadow-amber-900/30'
+                    : 'border-white/10 bg-white/[0.03] hover:border-amber-700/40 hover:bg-white/[0.05]'
+                }`}
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-700/15 text-3xl">
+                  {c.emoji}
+                </div>
+                <h3 className="mt-6 font-display text-2xl font-semibold leading-snug">{c.title}</h3>
+                <p className="mt-3 flex-grow text-[#f3e9dd]/55">{c.text}</p>
+
+                <div className="mt-6 rounded-xl border border-amber-700/30 bg-amber-700/10 px-4 py-3 font-medium text-amber-300">
+                  {c.highlight}
+                </div>
+
+                {c.price && (
+                  <div className="mt-4 font-display text-2xl font-bold text-amber-400">{c.price}</div>
+                )}
+
+                <Button
+                  className={`mt-6 h-12 w-full rounded-xl font-semibold ${
+                    c.featured
+                      ? 'bg-amber-600 text-[#1a120b] hover:bg-amber-500'
+                      : 'bg-white/5 text-[#f3e9dd] hover:bg-white/10'
+                  }`}
+                >
+                  {c.cta}
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Button
+              size="lg"
+              className="h-16 rounded-2xl bg-amber-600 px-10 text-lg font-bold text-[#1a120b] shadow-2xl shadow-amber-900/40 transition-transform hover:scale-105 hover:bg-amber-500"
+            >
+              Получить бесплатный расчёт для моей точки
+              <Icon name="ArrowRight" size={22} className="ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
