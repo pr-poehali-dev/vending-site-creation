@@ -1,5 +1,11 @@
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 const COFFEE_IMG =
   'https://cdn.poehali.dev/projects/0a06cd5a-f821-4e9a-b05a-5446779b85b3/files/b2af9712-1ded-4dc6-ac6c-8b9ceb3d7d6c.jpg';
@@ -274,6 +280,56 @@ const Index = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* БЛОК 5 — FAQ */}
+      <section className="relative overflow-hidden border-t border-white/5 bg-white/[0.02] py-24">
+        <div className="container max-w-3xl">
+          <h2 className="text-center font-display text-5xl font-bold tracking-tight sm:text-6xl">
+            Частые <span className="italic text-amber-500">вопросы</span>
+          </h2>
+
+          <Accordion type="single" collapsible className="mt-14 space-y-4">
+            {[
+              {
+                q: 'Кто чинит аппарат, если он сломается?',
+                a: 'Мы. Выезд мастера — в течение 24 часов в Находке. Запасные части — на складе. Вы не платите за ремонт ничего.',
+              },
+              {
+                q: 'Кто закупает и завозит кофе?',
+                a: 'Мы полностью берём на себя закупку свежеобжаренного зерна и плановые заправки по графику. Вам не нужно ни о чём думать.',
+              },
+              {
+                q: 'Какую выручку реально ожидать?',
+                a: 'Средний кофейный автомат в проходном месте Находки — 200–400 чашек в месяц. При цене 80–100 ₽ за чашку выручка: 16 000–40 000 ₽. Чистая прибыль партнёра: 8 000–25 000 ₽.',
+              },
+              {
+                q: 'Нужно ли ИП или ООО чтобы стать партнёром?',
+                a: 'Нет — для партнёрства (схема 50/50 с места) юрлицо не нужно. Договор с физлицом. Если хотите купить аппарат — поможем открыть ИП за один день.',
+              },
+              {
+                q: 'А если место окажется невыгодным?',
+                a: 'Первые 30 дней — тестовый период. Если выручка ниже прогноза — бесплатно переставим аппарат на другую точку. Без лишних слов.',
+              },
+            ].map((item, i) => (
+              <AccordionItem
+                key={i}
+                value={`item-${i}`}
+                className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] px-6 transition-colors hover:border-amber-700/40"
+              >
+                <AccordionTrigger className="py-5 text-left font-display text-xl font-semibold hover:no-underline [&[data-state=open]]:text-amber-400">
+                  <span className="flex items-center gap-3">
+                    <span className="text-amber-500">❓</span>
+                    {item.q}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="pb-5 text-base leading-relaxed text-[#f3e9dd]/65">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
     </div>
