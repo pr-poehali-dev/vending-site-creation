@@ -1,428 +1,241 @@
+import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
-const COFFEE_IMG =
-  'https://cdn.poehali.dev/projects/0a06cd5a-f821-4e9a-b05a-5446779b85b3/files/b2af9712-1ded-4dc6-ac6c-8b9ceb3d7d6c.jpg';
+const VENDING_IMG =
+  'https://cdn.poehali.dev/projects/0a06cd5a-f821-4e9a-b05a-5446779b85b3/files/d6382de4-5c9f-404e-a83e-307a41f54603.jpg';
 
 const Index = () => {
+  const [tab, setTab] = useState<'day' | 'week' | 'month'>('week');
+
+  const stats = {
+    day: { revenue: '14 280 ₽', sales: 187, machines: 12, growth: '+8%' },
+    week: { revenue: '96 540 ₽', sales: 1243, machines: 12, growth: '+12%' },
+    month: { revenue: '412 900 ₽', sales: 5318, machines: 12, growth: '+21%' },
+  }[tab];
+
+  const bars = [42, 58, 35, 71, 64, 88, 76];
+
   return (
-    <div className="min-h-screen bg-[#1a120b] font-sans text-[#f3e9dd] antialiased">
+    <div className="min-h-screen bg-background font-sans text-foreground antialiased dark">
       {/* NAV */}
-      <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#1a120b]/70 backdrop-blur-xl">
+      <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-background/70 backdrop-blur-xl">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-700 text-[#f3e9dd]">
-              <Icon name="Coffee" size={20} />
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-lime-400 text-black">
+              <Icon name="Boxes" size={20} />
             </div>
-            <span className="font-display text-2xl font-bold tracking-wide">BREW</span>
+            <span className="font-display text-lg font-extrabold tracking-tight">VendCore</span>
           </div>
-          <nav className="hidden items-center gap-8 text-sm text-[#f3e9dd]/60 md:flex">
-            <a href="#" className="transition-colors hover:text-[#f3e9dd]">Автоматы</a>
-            <a href="#" className="transition-colors hover:text-[#f3e9dd]">Меню</a>
-            <a href="#" className="transition-colors hover:text-[#f3e9dd]">Контакты</a>
+          <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
+            <a href="#cabinet" className="transition-colors hover:text-foreground">Личный кабинет</a>
+            <a href="#features" className="transition-colors hover:text-foreground">Возможности</a>
+            <a href="#contacts" className="transition-colors hover:text-foreground">Контакты</a>
           </nav>
-          <Button className="rounded-xl bg-amber-700 font-semibold text-[#f3e9dd] hover:bg-amber-600">
-            Заказать
+          <Button className="rounded-xl bg-lime-400 font-semibold text-black hover:bg-lime-300">
+            Войти
           </Button>
         </div>
       </header>
 
       {/* HERO */}
-      <section className="relative min-h-screen overflow-hidden pt-16">
-        <div className="absolute -left-40 top-20 h-[28rem] w-[28rem] rounded-full bg-amber-800/30 blur-[140px] animate-glow" />
-        <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-orange-900/30 blur-[140px] animate-glow" />
-        <div className="container grid min-h-[calc(100vh-4rem)] items-center gap-12 lg:grid-cols-2">
+      <section className="relative overflow-hidden pt-32 pb-24">
+        <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-lime-500/20 blur-[120px] animate-glow" />
+        <div className="absolute -right-32 top-40 h-96 w-96 rounded-full bg-teal-500/20 blur-[120px] animate-glow" />
+        <div className="container grid items-center gap-12 lg:grid-cols-2">
           <div className="animate-fade-up" style={{ opacity: 0 }}>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-700/30 bg-amber-700/10 px-4 py-1.5 text-xs text-amber-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-              Премиальный кофе на каждый день
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-lime-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-lime-400" />
+              Умный вендинг нового поколения
             </div>
-            <h1 className="font-display text-6xl font-bold leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl">
-              Свежий
-              <span className="block italic text-amber-500">эспрессо</span>
-              в один клик
+            <h1 className="font-display text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+              Доход в каждом
+              <span className="block text-lime-400">автомате</span>
             </h1>
-            <p className="mt-6 max-w-md text-lg text-[#f3e9dd]/60">
-              Кофейные автоматы премиум-класса. Зёрна обжарки нашего ростера,
-              насыщенная крема и аромат настоящего кофешопа — где угодно.
+            <p className="mt-6 max-w-md text-lg text-muted-foreground">
+              Современные вендинговые аппараты с личным кабинетом. Следите за продажами
+              и доходами в реальном времени — из любой точки мира.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Button size="lg" className="rounded-xl bg-amber-700 px-7 font-semibold text-[#f3e9dd] hover:bg-amber-600">
-                Попробовать
+              <Button size="lg" className="rounded-xl bg-lime-400 px-7 font-semibold text-black hover:bg-lime-300">
+                Открыть кабинет
                 <Icon name="ArrowRight" size={18} className="ml-1" />
               </Button>
-              <Button size="lg" variant="outline" className="rounded-xl border-white/15 bg-transparent px-7 text-[#f3e9dd] hover:bg-white/5">
-                Смотреть меню
+              <Button size="lg" variant="outline" className="rounded-xl border-white/15 bg-transparent px-7 hover:bg-white/5">
+                Узнать подробнее
               </Button>
             </div>
             <div className="mt-12 flex gap-10">
               {[
-                ['12', 'видов кофе'],
-                ['30 сек', 'до чашки'],
-                ['100%', 'арабика'],
+                ['1 200+', 'аппаратов'],
+                ['24/7', 'мониторинг'],
+                ['99.9%', 'аптайм'],
               ].map(([n, l]) => (
                 <div key={l}>
-                  <div className="font-display text-3xl font-bold text-amber-400">{n}</div>
-                  <div className="text-sm text-[#f3e9dd]/50">{l}</div>
+                  <div className="font-display text-2xl font-bold">{n}</div>
+                  <div className="text-sm text-muted-foreground">{l}</div>
                 </div>
               ))}
             </div>
           </div>
           <div className="relative animate-fade-up" style={{ opacity: 0, animationDelay: '0.2s' }}>
-            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-amber-700/20 to-orange-600/20 blur-2xl" />
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-lime-400/20 to-teal-400/20 blur-2xl" />
             <img
-              src={COFFEE_IMG}
-              alt="Чашка свежего эспрессо"
+              src={VENDING_IMG}
+              alt="Вендинговый автомат VendCore"
               className="relative w-full animate-float rounded-[2rem] border border-white/10 object-cover shadow-2xl"
             />
           </div>
         </div>
       </section>
 
-      {/* БЛОК 2 — ПРОБЛЕМА */}
-      <section className="relative overflow-hidden border-t border-white/5 py-24">
+      {/* CABINET / DASHBOARD */}
+      <section id="cabinet" className="border-y border-white/5 bg-white/[0.02] py-24">
         <div className="container">
-          <h2 className="text-center font-display text-5xl font-bold tracking-tight sm:text-6xl">
-            Это про <span className="italic text-amber-500">вас</span>?
-          </h2>
-
-          <div className="mt-16 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                emoji: '☕',
-                title: 'Посетители просят кофе — а вы не кофейня',
-                text: 'Офис, шиномонтаж, парикмахерская, магазин. Людям хочется кофе, но варить вручную некому и незачем.',
-              },
-              {
-                emoji: '💸',
-                title: 'Место есть — деньги не зарабатывает',
-                text: 'Угол в торговом зале, коридор, зона ожидания — простаивают. А могли бы приносить 15 000–30 000 ₽ в месяц.',
-              },
-              {
-                emoji: '🔧',
-                title: 'Боитесь возни с техникой и поставщиками',
-                text: 'Думаете: сломается — кто чинить будет? Где брать зерно? Кто заправлять? Всё это кажется сложным.',
-              },
-            ].map((c, i) => (
-              <div
-                key={i}
-                className="group rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all hover:border-amber-700/40 hover:bg-white/[0.05]"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-700/10 text-3xl transition-transform group-hover:scale-110">
-                  {c.emoji}
-                </div>
-                <h3 className="mt-6 font-display text-2xl font-semibold leading-snug">{c.title}</h3>
-                <p className="mt-3 text-[#f3e9dd]/55">{c.text}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="mx-auto mt-14 max-w-2xl text-center font-display text-3xl font-medium leading-snug sm:text-4xl">
-            Мы убираем все три проблемы.{' '}
-            <span className="italic text-amber-500">Вы просто получаете деньги.</span>
-          </p>
-        </div>
-      </section>
-
-      {/* БЛОК 3 — РЕШЕНИЕ + ОФФЕР */}
-      <section className="relative overflow-hidden border-t border-white/5 bg-white/[0.02] py-24">
-        <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-amber-800/20 blur-[140px] animate-glow" />
-        <div className="container relative">
-          <div className="relative mx-auto mb-16 max-w-3xl overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-amber-900/20">
-            <video
-              src="https://cdn.poehali.dev/projects/0a06cd5a-f821-4e9a-b05a-5446779b85b3/bucket/82515840-ccbf-4ce7-a839-f4599b4763e0.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="aspect-video w-full object-cover"
-            />
-          </div>
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-5xl font-bold tracking-tight sm:text-6xl">
-              Три способа зарабатывать на кофе в{' '}
-              <span className="italic text-amber-500">Находке</span>
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <h2 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+              Личный кабинет
             </h2>
-            <p className="mt-5 text-lg text-[#f3e9dd]/60">
-              Выбери формат под себя — мы подстроимся под вашу ситуацию:
+            <p className="mt-4 text-muted-foreground">
+              Полная картина бизнеса: продажи, доходы и статус каждого аппарата на одном экране.
             </p>
           </div>
 
-          <div className="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
-            {[
-              {
-                emoji: '🤝',
-                title: 'Партнёрство — вложений ноль',
-                text: 'У вас есть место 60×60 см и розетка 220В. Мы ставим аппарат за свой счёт, загружаем зерно и обслуживаем. Вы получаете 20–35% с каждой чашки.',
-                highlight: 'От 8 000 до 25 000 ₽ в месяц чистыми',
-                price: '',
-                cta: 'Хочу так',
-                featured: true,
-              },
-              {
-                emoji: '💼',
-                title: 'Свой аппарат под ключ',
-                text: 'Покупаете аппарат — мы находим место, запускаем, берём обслуживание на себя. Весь доход — ваш.',
-                highlight: 'Окупаемость: 6–10 месяцев',
-                price: 'От 180 000 ₽',
-                cta: 'Рассчитать стоимость',
-                featured: false,
-              },
-              {
-                emoji: '🏢',
-                title: 'Корпоративный кофе для офиса',
-                text: 'Хотите кофе для сотрудников без найма баристы? Аренда аппарата + полное обслуживание. Сотрудники пьют кофе по 35–50 ₽ — вы ничего не тратите.',
-                highlight: 'Аренда от 2 500 ₽/мес',
-                price: '',
-                cta: 'Узнать подробнее',
-                featured: false,
-              },
-            ].map((c, i) => (
-              <div
-                key={i}
-                className={`flex flex-col rounded-3xl border p-8 transition-all ${
-                  c.featured
-                    ? 'border-amber-600/50 bg-amber-700/10 shadow-2xl shadow-amber-900/30'
-                    : 'border-white/10 bg-white/[0.03] hover:border-amber-700/40 hover:bg-white/[0.05]'
-                }`}
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-700/15 text-3xl">
-                  {c.emoji}
-                </div>
-                <h3 className="mt-6 font-display text-2xl font-semibold leading-snug">{c.title}</h3>
-                <p className="mt-3 flex-grow text-[#f3e9dd]/55">{c.text}</p>
+          <div className="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-card/40 p-6 backdrop-blur sm:p-8">
+            <div className="mb-6 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 animate-glow rounded-full bg-lime-400" />
+                <span className="text-sm font-medium">Данные в реальном времени</span>
+              </div>
+              <div className="flex gap-1 rounded-xl border border-white/10 bg-background/50 p-1 text-sm">
+                {(['day', 'week', 'month'] as const).map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setTab(t)}
+                    className={`rounded-lg px-4 py-1.5 transition-all ${
+                      tab === t ? 'bg-lime-400 font-semibold text-black' : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    {t === 'day' ? 'День' : t === 'week' ? 'Неделя' : 'Месяц'}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-                <div className="mt-6 rounded-xl border border-amber-700/30 bg-amber-700/10 px-4 py-3 font-medium text-amber-300">
-                  {c.highlight}
-                </div>
-
-                {c.price && (
-                  <div className="mt-4 font-display text-2xl font-bold text-amber-400">{c.price}</div>
-                )}
-
-                <Button
-                  className={`mt-6 h-12 w-full rounded-xl font-semibold ${
-                    c.featured
-                      ? 'bg-amber-600 text-[#1a120b] hover:bg-amber-500'
-                      : 'bg-white/5 text-[#f3e9dd] hover:bg-white/10'
+            <div className="grid gap-4 sm:grid-cols-4">
+              {[
+                { icon: 'Wallet', label: 'Доход', value: stats.revenue, accent: true },
+                { icon: 'ShoppingBag', label: 'Продаж', value: stats.sales },
+                { icon: 'Boxes', label: 'Аппаратов', value: stats.machines },
+                { icon: 'TrendingUp', label: 'Рост', value: stats.growth },
+              ].map((c) => (
+                <div
+                  key={c.label}
+                  className={`rounded-2xl border p-5 ${
+                    c.accent ? 'border-lime-400/30 bg-lime-400/10' : 'border-white/10 bg-background/40'
                   }`}
                 >
-                  {c.cta}
-                </Button>
-              </div>
-            ))}
-          </div>
+                  <Icon name={c.icon} size={20} className={c.accent ? 'text-lime-400' : 'text-muted-foreground'} />
+                  <div className="mt-4 font-display text-2xl font-bold">{c.value}</div>
+                  <div className="text-sm text-muted-foreground">{c.label}</div>
+                </div>
+              ))}
+            </div>
 
-          <div className="mt-16 text-center">
-            <Button
-              size="lg"
-              className="h-16 rounded-2xl bg-amber-600 px-10 text-lg font-bold text-[#1a120b] shadow-2xl shadow-amber-900/40 transition-transform hover:scale-105 hover:bg-amber-500"
-            >
-              Получить бесплатный расчёт для моей точки
-              <Icon name="ArrowRight" size={22} className="ml-2" />
-            </Button>
+            <div className="mt-6 rounded-2xl border border-white/10 bg-background/40 p-6">
+              <div className="mb-4 text-sm font-medium text-muted-foreground">Динамика продаж</div>
+              <div className="flex h-40 items-end justify-between gap-3">
+                {bars.map((h, i) => (
+                  <div key={i} className="flex flex-1 flex-col items-center gap-2">
+                    <div
+                      className="w-full rounded-t-lg bg-gradient-to-t from-lime-400/40 to-lime-400 transition-all hover:from-lime-300 hover:to-lime-200"
+                      style={{ height: `${h}%` }}
+                    />
+                    <span className="text-xs text-muted-foreground">{['Пн','Вт','Ср','Чт','Пт','Сб','Вс'][i]}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* БЛОК 4 — СОЦИАЛЬНЫЕ ДОКАЗАТЕЛЬСТВА */}
-      <section className="relative overflow-hidden border-t border-white/5 py-24">
+      {/* FEATURES */}
+      <section id="features" className="py-24">
         <div className="container">
-          <h2 className="text-center font-display text-5xl font-bold tracking-tight sm:text-6xl">
-            Уже работают в Находке и{' '}
-            <span className="italic text-amber-500">Приморье</span>
-          </h2>
-
-          <div className="mt-16 grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {[
-              {
-                text: 'Поставили автомат в зону ожидания нашего шиномонтажа. Клиенты довольны, мы получаем около 18 000 ₽ в месяц — просто так, пока люди ждут машину. Ни разу не пожалели.',
-                name: 'Сергей Д.',
-                role: 'шиномонтаж «Колесо», Находка',
-              },
-              {
-                text: 'Взяли аппарат в аренду для офиса на 25 человек. Сотрудники счастливы, никаких очередей на кухне. Кофе обходится в 40 ₽ за чашку — дешевле, чем покупать в кофейне.',
-                name: 'Наталья В.',
-                role: 'HR-директор, логистическая компания, Находка',
-              },
-              {
-                text: 'Хотел пассивный доход, но не знал с чего начать. Пришёл на консультацию — через неделю аппарат уже стоял в торговом центре. Первый месяц — 22 000 чистыми.',
-                name: 'Алексей М.',
-                role: 'предприниматель, Находка',
-              },
-            ].map((r, i) => (
-              <div
-                key={i}
-                className="flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all hover:border-amber-700/40 hover:bg-white/[0.05]"
-              >
-                <div className="flex gap-1 text-amber-400">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Icon key={s} name="Star" size={18} className="fill-amber-400" />
-                  ))}
+              { icon: 'Activity', title: 'Аналитика 24/7', text: 'Следите за продажами и доходами каждого аппарата в любой момент.' },
+              { icon: 'Bell', title: 'Уведомления', text: 'Узнавайте о пустых ячейках и сбоях раньше клиентов.' },
+              { icon: 'CreditCard', title: 'Любая оплата', text: 'Карты, СБП, наличные — принимайте платежи без ограничений.' },
+            ].map((f) => (
+              <div key={f.title} className="group rounded-3xl border border-white/10 bg-card/40 p-8 transition-all hover:border-lime-400/30 hover:bg-white/[0.04]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-400/10 text-lime-400 transition-transform group-hover:scale-110">
+                  <Icon name={f.icon} size={24} />
                 </div>
-                <p className="mt-5 flex-grow text-lg italic leading-relaxed text-[#f3e9dd]/80">
-                  «{r.text}»
-                </p>
-                <div className="mt-6 border-t border-white/10 pt-5">
-                  <div className="font-display text-xl font-semibold text-amber-300">{r.name}</div>
-                  <div className="text-sm text-[#f3e9dd]/50">{r.role}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5 lg:grid-cols-4">
-            {[
-              ['38 +', 'точек в Приморье'],
-              ['4 года', 'на рынке Находки'],
-              ['от 6 мес', 'окупаемость аппарата'],
-              ['0 ₽', 'вложений по схеме партнёрства'],
-            ].map(([n, l]) => (
-              <div key={l} className="bg-[#1a120b] px-6 py-10 text-center">
-                <div className="font-display text-4xl font-bold text-amber-400 sm:text-5xl">{n}</div>
-                <div className="mt-2 text-sm text-[#f3e9dd]/55">{l}</div>
+                <h3 className="mt-6 font-display text-xl font-bold">{f.title}</h3>
+                <p className="mt-2 text-muted-foreground">{f.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* БЛОК 5 — FAQ */}
-      <section className="relative overflow-hidden border-t border-white/5 bg-white/[0.02] py-24">
-        <div className="container max-w-3xl">
-          <h2 className="text-center font-display text-5xl font-bold tracking-tight sm:text-6xl">
-            Частые <span className="italic text-amber-500">вопросы</span>
-          </h2>
-
-          <Accordion type="single" collapsible className="mt-14 space-y-4">
-            {[
-              {
-                q: 'Кто чинит аппарат, если он сломается?',
-                a: 'Мы. Выезд мастера — в течение 24 часов в Находке. Запасные части — на складе. Вы не платите за ремонт ничего.',
-              },
-              {
-                q: 'Кто закупает и завозит кофе?',
-                a: 'Мы полностью берём на себя закупку свежеобжаренного зерна и плановые заправки по графику. Вам не нужно ни о чём думать.',
-              },
-              {
-                q: 'Какую выручку реально ожидать?',
-                a: 'Средний кофейный автомат в проходном месте Находки — 200–400 чашек в месяц. При цене 80–100 ₽ за чашку выручка: 16 000–40 000 ₽. Чистая прибыль партнёра: 8 000–25 000 ₽.',
-              },
-              {
-                q: 'Нужно ли ИП или ООО чтобы стать партнёром?',
-                a: 'Нет — для партнёрства (схема 50/50 с места) юрлицо не нужно. Договор с физлицом. Если хотите купить аппарат — поможем открыть ИП за один день.',
-              },
-              {
-                q: 'А если место окажется невыгодным?',
-                a: 'Первые 30 дней — тестовый период. Если выручка ниже прогноза — бесплатно переставим аппарат на другую точку. Без лишних слов.',
-              },
-            ].map((item, i) => (
-              <AccordionItem
-                key={i}
-                value={`item-${i}`}
-                className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] px-6 transition-colors hover:border-amber-700/40"
-              >
-                <AccordionTrigger className="py-5 text-left font-display text-xl font-semibold hover:no-underline [&[data-state=open]]:text-amber-400">
-                  <span className="flex items-center gap-3">
-                    <span className="text-amber-500">❓</span>
-                    {item.q}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="pb-5 text-base leading-relaxed text-[#f3e9dd]/65">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
-
-      {/* БЛОК 6 — ФИНАЛЬНЫЙ CTA + ФОРМА */}
-      <section className="relative overflow-hidden border-t border-white/5 py-24">
-        <div className="absolute left-1/2 top-0 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-amber-800/25 blur-[150px] animate-glow" />
-        <div className="container relative max-w-3xl text-center">
-          <h2 className="font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-            Узнай за 15 минут, сколько принесёт кофейный автомат именно{' '}
-            <span className="italic text-amber-500">в твоей точке</span>
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-[#f3e9dd]/60">
-            Оставь заявку — мы позвоним, зададим пару вопросов о вашем месте и дадим
-            конкретные цифры. Без воды, без давления.
-          </p>
-
-          <form className="mx-auto mt-12 max-w-lg space-y-4 rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur">
-            <Input
-              placeholder="Ваше имя"
-              className="h-13 rounded-xl border-white/10 bg-[#1a120b]/60 py-6 text-[#f3e9dd] placeholder:text-[#f3e9dd]/40"
-            />
-            <Input
-              placeholder="Телефон (WhatsApp или Telegram)"
-              className="h-13 rounded-xl border-white/10 bg-[#1a120b]/60 py-6 text-[#f3e9dd] placeholder:text-[#f3e9dd]/40"
-            />
-            <Select>
-              <SelectTrigger className="h-auto rounded-xl border-white/10 bg-[#1a120b]/60 py-6 text-[#f3e9dd]">
-                <SelectValue placeholder="Как связаться?" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="call">Позвонить</SelectItem>
-                <SelectItem value="whatsapp">WhatsApp</SelectItem>
-                <SelectItem value="telegram">Telegram</SelectItem>
-              </SelectContent>
-            </Select>
-            <Button
-              type="submit"
-              className="h-16 w-full rounded-xl bg-amber-600 text-lg font-bold text-[#1a120b] shadow-2xl shadow-amber-900/40 transition-transform hover:scale-[1.02] hover:bg-amber-500"
-            >
-              ☕ Получить бесплатный расчёт
-            </Button>
-            <p className="flex items-center justify-center gap-2 text-sm text-[#f3e9dd]/45">
-              🔒 Никакого спама. Только конкретный расчёт под вашу ситуацию. Ответим в течение 15 минут.
+      {/* CONTACTS */}
+      <section id="contacts" className="border-t border-white/5 bg-white/[0.02] py-24">
+        <div className="container grid gap-12 lg:grid-cols-2">
+          <div>
+            <h2 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+              Свяжитесь с нами
+            </h2>
+            <p className="mt-4 max-w-md text-muted-foreground">
+              Расскажем, как установить вендинговый аппарат и подключить личный кабинет
+              под ваш бизнес.
             </p>
-          </form>
-
-          <div className="mx-auto mt-12 grid max-w-2xl gap-4 sm:grid-cols-3">
-            {[
-              { icon: '📱', label: 'WhatsApp / Telegram', value: '+7 (924) 3222 122' },
-              { icon: '📍', label: 'Находка', value: 'Приморский край' },
-              { icon: '⏰', label: 'Работаем', value: 'пн–вс, 9:00–19:00' },
-            ].map((c) => (
-              <div
-                key={c.label}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
-              >
-                <div className="text-2xl">{c.icon}</div>
-                <div className="mt-2 font-display text-lg font-semibold text-amber-300">{c.label}</div>
-                <div className="text-sm text-[#f3e9dd]/55">{c.value}</div>
-              </div>
-            ))}
+            <div className="mt-10 space-y-5">
+              {[
+                { icon: 'Phone', label: 'Телефон', value: '+7 (800) 555-35-35' },
+                { icon: 'Mail', label: 'Почта', value: 'hello@vendcore.ru' },
+                { icon: 'MapPin', label: 'Офис', value: 'Москва, ул. Тверская, 1' },
+              ].map((c) => (
+                <div key={c.label} className="flex items-center gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-lime-400/10 text-lime-400">
+                    <Icon name={c.icon} size={18} />
+                  </div>
+                  <div>
+                    <div className="text-sm text-muted-foreground">{c.label}</div>
+                    <div className="font-medium">{c.value}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+
+          <form className="rounded-3xl border border-white/10 bg-card/40 p-8 backdrop-blur">
+            <div className="space-y-4">
+              <Input placeholder="Ваше имя" className="h-12 rounded-xl border-white/10 bg-background/50" />
+              <Input placeholder="Телефон или e-mail" className="h-12 rounded-xl border-white/10 bg-background/50" />
+              <Textarea placeholder="Сообщение" rows={4} className="rounded-xl border-white/10 bg-background/50" />
+              <Button className="h-12 w-full rounded-xl bg-lime-400 font-semibold text-black hover:bg-lime-300">
+                Отправить заявку
+              </Button>
+            </div>
+          </form>
         </div>
       </section>
 
       {/* FOOTER */}
       <footer className="border-t border-white/5 py-10">
-        <div className="container flex flex-col items-center justify-between gap-4 text-sm text-[#f3e9dd]/50 sm:flex-row">
+        <div className="container flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-700 text-[#f3e9dd]">
-              <Icon name="Coffee" size={16} />
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-lime-400 text-black">
+              <Icon name="Boxes" size={16} />
             </div>
-            <span className="font-display text-xl font-bold text-[#f3e9dd]">BREW</span>
+            <span className="font-display font-bold text-foreground">VendCore</span>
           </div>
-          <span>© 2026 BREW. Кофейные автоматы в Находке.</span>
+          <span>© 2026 VendCore. Все права защищены.</span>
         </div>
       </footer>
     </div>
